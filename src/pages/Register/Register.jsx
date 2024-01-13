@@ -1,9 +1,10 @@
-import { useContext } from 'react';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { useContext } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
+
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -28,8 +29,10 @@ const Register = () => {
   };
 
   const onSubmit = async (data) => {
+   
     try {
         const imageFile = { image: data.image[0] };
+       
         const imgbbResponse = await axiosPublic.post(image_hosting_api, imageFile, {
           headers: {
             'content-type': 'multipart/form-data',
@@ -54,11 +57,10 @@ const Register = () => {
         const userInfo = {
           name: data.name,
           email: data.email,
-          photoURL: imgbbImageLink,
           section: data.section,
-          district: data.district,
-          upazila: data.upazila,
-          status: 'active',
+          designation: data.designation,
+          photoURL: imgbbImageLink,
+          status: 'user',
         };
   
         const mongoDbResponse = await axiosPublic.post('/users', userInfo);
@@ -68,7 +70,7 @@ const Register = () => {
         }
   
         reset();
-      Swal.fire({
+         Swal.fire({
         position: 'top-end',
         icon: 'success',
         title: 'User created successfully',
@@ -79,6 +81,10 @@ const Register = () => {
       navigate('/');
     } catch (error) {
       console.error(error.message);
+      if (error.response) {
+        // Log detailed error response from ImgBB
+        console.error('Error Response from ImgBB:', error.response.data);
+      }
 
       Swal.fire({
         icon: 'error',
@@ -124,6 +130,18 @@ const Register = () => {
             </div>
 
             <div className="mb-4">
+            <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+              Photo
+            </label>
+            <input
+              type="file"
+              id="image"
+              {...register('image', { required: true })}
+              className="border rounded w-full py-[6px] px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+
+            <div className="mb-4">
               <label  className="block text-sm font-medium text-gray-600">
                 Section
               </label>
@@ -138,7 +156,21 @@ const Register = () => {
               </select>
               {errors.section && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
-
+            <div className="mb-4">
+              <label  className="block text-sm font-medium text-gray-600">
+                Designation
+              </label>
+              <input
+                type="text"
+                {...register('designation', { required: true })}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+              {errors.designation && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+            </div>
+   <div className="mb-4">
+   <label  className="block text-sm font-medium text-gray-600">
+                Password
+              </label>
             <input
   type="password"
   {...register('password', {
@@ -157,7 +189,13 @@ const Register = () => {
     {errors.password?.type === 'pattern' && 'Password must have an uppercase, a lowercase, and a special character'}
   </p>
 )}
+   </div>
 
+
+<div className="mb-4">
+<label  className="block text-sm font-medium text-gray-600">
+              Confirm  Password
+              </label>
 <input
   type="password"
   {...register('confirmPassword', {
@@ -169,6 +207,7 @@ const Register = () => {
 {errors.confirmPassword && (
   <p className="text-red-500 text-xs mt-1">{errors.confirmPassword?.message}</p>
 )}
+</div>
 
 
 
