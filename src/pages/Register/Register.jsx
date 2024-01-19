@@ -29,16 +29,16 @@ const Register = () => {
   };
 
   const onSubmit = async (data) => {
-   
+    console.log("data is:",data);
     try {
         const imageFile = { image: data.image[0] };
-       
+        console.log("image file is:",imageFile);
         const imgbbResponse = await axiosPublic.post(image_hosting_api, imageFile, {
           headers: {
             'content-type': 'multipart/form-data',
           },
         });
-  
+        console.log("response is:",imgbbResponse);
         if (!imgbbResponse.data || imgbbResponse.data.status !== 200) {
           throw new Error('Failed to upload image to imgbb');
         }
@@ -66,6 +66,7 @@ const Register = () => {
         const mongoDbResponse = await axiosPublic.post('/users', userInfo);
   
         if (!mongoDbResponse.data || !mongoDbResponse.data.insertedId) {
+          console.error('Failed to upload image to imgbb. Response:', imgbbResponse);
           throw new Error('Failed to create user in MongoDB');
         }
   
@@ -81,10 +82,10 @@ const Register = () => {
       navigate('/');
     } catch (error) {
       console.error(error.message);
-      if (error.response) {
-        // Log detailed error response from ImgBB
-        console.error('Error Response from ImgBB:', error.response.data);
-      }
+       if (error.response) {
+      // Log detailed error response from ImgBB
+      console.error('Error Response from ImgBB:', error.response.data);
+    }
 
       Swal.fire({
         icon: 'error',
@@ -136,7 +137,7 @@ const Register = () => {
             <input
               type="file"
               id="image"
-              {...register('image', { required: true })}
+              {...register('image',)}
               className="border rounded w-full py-[6px] px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

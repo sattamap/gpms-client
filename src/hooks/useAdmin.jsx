@@ -14,7 +14,7 @@ const useAdmin = () => {
         queryFn: async () => {
             console.log('checking admin', user)
             const res = await axiosPublic.get(`/users/admin/${user.email}`);
-            // console.log(res.data);
+            console.log(res.data);
             return res.data?.admin;
             
         }
