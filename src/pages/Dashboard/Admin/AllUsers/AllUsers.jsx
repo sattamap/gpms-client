@@ -202,9 +202,8 @@ const AllUsers = () => {
             <div>
               <p><strong>Name:</strong> {selectedUser.name}</p>
               <p><strong>Email:</strong> {selectedUser.email}</p>
-              <p><strong>Blood Group:</strong> {selectedUser.bloodGroup}</p>
-              <p><strong>District:</strong> {selectedUser.district}</p>
-              <p><strong>Upazila:</strong> {selectedUser.upazila}</p>
+              <p><strong>Section:</strong> {selectedUser.section}</p>
+              <p><strong>Designation:</strong> {selectedUser.designation}</p>
             </div>
             <div><img src={selectedUser.photoURL} alt={selectedUser.name} /></div>
           </div>
