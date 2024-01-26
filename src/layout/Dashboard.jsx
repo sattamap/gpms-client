@@ -11,24 +11,36 @@ const Dashboard = () => {
   const axiosPublic = useAxiosPublic();
  
   useEffect(() => {
-    // Fetch user data from MongoDB using Axios
     const fetchUserData = async () => {
       try {
         const response = await axiosPublic.get(`/users/${user.email}`);
         const data = response.data;
   
-        console.log('Received User Data:', data); // Log the data to the console
-  
-        // If the data is an array, take the first element (assuming the array contains a single user)
         const userObject = Array.isArray(data) ? data[0] : data;
         setUserData(userObject);
+
+        // Determine the default route based on user status and navigate
+        switch (userObject.status) {
+          case "admin":
+            navigate("/dashboard/allUsers");
+            break;
+          case "coordinator":
+            navigate("/dashboard/manage");
+            break;
+          case "monitor":
+            navigate("/dashboard/activeVisitor");
+            break;
+          case "none":
+          default:
+            navigate("/dashboard/none");
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
   
     fetchUserData();
-  }, [user, axiosPublic]);
+  }, [user, axiosPublic, navigate]);
 
   const handleLogOut = () => {
     logOut()
@@ -93,8 +105,8 @@ const Dashboard = () => {
           {userData?.status === "none" && (
             // Add links specific to the coordinator
             <li>
-            <NavLink to="/dashboard/addVisitor">
-              <FaUser /> Add Visitor
+            <NavLink to="/dashboard/none">
+              <FaHome /> Home
             </NavLink>
           </li>
           )}

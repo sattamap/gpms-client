@@ -60,7 +60,7 @@ const Register = () => {
           section: data.section,
           designation: data.designation,
           photoURL: imgbbImageLink,
-          status: 'user',
+          status: 'none',
         };
   
         const mongoDbResponse = await axiosPublic.post('/users', userInfo);

@@ -8,6 +8,7 @@ import AddVisitor from "../pages/Dashboard/Coordinator/AddVisitor/AddVisitor";
 import ActiveVisitor from "../pages/Dashboard/Admin/ActiveVisitor/ActiveVisitor";
 import ManageVisitor from "../pages/Dashboard/Coordinator/ManageVisitor/ManageVisitor";
 import UpdateVisitor from "../pages/Dashboard/Coordinator/UpdateVisitor/UpdateVisitor";
+import NoRoleWelcome from "../pages/Dashboard/NoRole/NoRoleWelcome/NoRoleWelcome";
 
 
 export const router = createBrowserRouter([
@@ -29,8 +30,11 @@ export const router = createBrowserRouter([
       path: "dashboard",
       element: <Dashboard></Dashboard>,
       children: [
-        // user routes
-        
+        // user (no role) routes
+        {
+          path: "none",
+          element: <NoRoleWelcome></NoRoleWelcome>,
+        },
   
         // admin routes
      
