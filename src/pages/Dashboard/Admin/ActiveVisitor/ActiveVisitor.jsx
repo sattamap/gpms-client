@@ -18,6 +18,8 @@ const formatTime = (time) => {
 const ActiveVisitor = () => {
   const axiosPublic = useAxiosPublic();
   const [visitors, setVisitors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   useEffect(() => {
     const fetchVisitors = async () => {
@@ -33,6 +35,32 @@ const ActiveVisitor = () => {
 
     fetchVisitors();
   }, [axiosPublic]);
+
+
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = currentPage * itemsPerPage;
+  const currentItems = visitors.slice(indexOfFirstItem, indexOfLastItem);
+
+  const pages = Math.ceil(visitors.length / itemsPerPage);
+  const pageNumbers = [...Array(pages).keys()];
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePrevClick = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, pages - 1));
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    setItemsPerPage(newItemsPerPage);
+    // You can perform additional logic when itemsPerPage changes, e.g., fetch data with the new itemsPerPage
+  };
+
 
   return (
     <div>
@@ -54,9 +82,9 @@ const ActiveVisitor = () => {
             </tr>
           </thead>
           <tbody>
-            {visitors.map((visitor, index) => (
+            {currentItems.map((visitor, index) => (
               <tr key={visitor._id}>
-                <th>{index + 1}</th>
+                <th>{index + indexOfFirstItem + 1}.</th>
                 <td>{visitor.name}</td>
                 <td>{visitor.section}</td>
                 <td>{visitor.purpose}</td>
@@ -74,6 +102,44 @@ const ActiveVisitor = () => {
             ))}
           </tbody>
         </table>
+
+              {/* Pagination */}
+              <nav className="flex justify-center mt-10">
+        <select className="mr-6 border border-solid border-teal-400 rounded-lg" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
+        <option value={5}>5 per page</option>
+        <option value={10}>10 per page</option>
+        {/* Add more options as needed */}
+      </select>
+          <button
+            className="btn btn-sm btn-info"
+            onClick={handlePrevClick}
+            disabled={currentPage === 0}
+          >
+            Previous
+          </button>
+          <ul className="flex list-none gap-10 mx-8 ">
+            {pageNumbers.map((pageNumber) => (
+              <li
+                key={pageNumber}
+                className={`pagination-item ${currentPage === pageNumber ? 'btn btn-sm bg-teal-950 text-white' : ''}`}
+              >
+                <button
+                  className="pagination-link"
+                  onClick={() => handlePageClick(pageNumber)}
+                >
+                  {pageNumber + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            className="btn btn-sm btn-info"
+            onClick={handleNextClick}
+            disabled={currentPage === pages - 1}
+          >
+            Next
+          </button>
+        </nav>
       </div>
     </div>
   );
