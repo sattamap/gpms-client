@@ -64,9 +64,8 @@ const ActiveVisitor = () => {
 
   return (
     <div>
-      <div className='bg-emerald-600 p-4'>
-        <h2>Active Visitors</h2>
-        <h2>{visitors.length}</h2>
+      <div className='text-center bg-emerald-800 p-10 rounded-xl'>
+        <h2 className='text-2xl text-slate-100 font-bold'>Active Visitors : <span className='bg-green-500 font-extrabold px-2 rounded-lg'>{visitors.length}</span></h2>
       </div>
 
       <div className="overflow-x-auto">

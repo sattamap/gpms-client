@@ -79,6 +79,11 @@ const Dashboard = () => {
                   <FaUsers /> Active Visitor
                 </NavLink>
               </li>
+              <li>
+              <NavLink to="/dashboard/manage">
+              <FaUser /> Manage Visitor
+            </NavLink>
+              </li>
             </>
           )}
 
