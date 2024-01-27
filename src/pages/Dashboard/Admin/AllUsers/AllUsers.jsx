@@ -5,6 +5,9 @@ import Modal from 'react-modal';
 import { useState } from "react";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
+
+Modal.setAppElement('#root');
+
 const AllUsers = () => {
   const axiosPublic = useAxiosPublic();
   const [selectedUser, setSelectedUser] = useState(null);
@@ -100,16 +103,15 @@ const AllUsers = () => {
         <h2 className="text-2xl text-slate-100 font-extrabold">Total users: {users.length}</h2>
       </div>
       <div className="overflow-x-auto">
-        <table className="table table-zebra mt-10">
+        <table className="table table-xs table-zebra mt-10">
           <thead>
             <tr>
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>Action</th>
               <th>Status</th>
               <th>User Info</th>
-              <th>Delete</th>
+              <th>Action</th>
               {/* <th>
                 <select
                   value={selectedStatus}
@@ -152,7 +154,7 @@ const AllUsers = () => {
   </button>
 </td>
 
-                <td></td>
+  
                 <td>
                   <button
                     onClick={() => handleSeeInfo(user)}
@@ -176,6 +178,7 @@ const AllUsers = () => {
       </div>
 
       <Modal
+        
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}
         contentLabel="User Information"

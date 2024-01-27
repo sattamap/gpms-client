@@ -51,8 +51,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-64 min-h-screen bg-[#4dd0e1]">
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="w-full lg:w-64 lg:min-h-screen bg-[#38a9a1]">
         <div className="flex flex-col items-center justify-center p-4">
           <img
             src={user?.photoURL}
