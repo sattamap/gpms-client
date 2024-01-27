@@ -124,7 +124,8 @@ const Register = () => {
             </div>
     </div>
 
-            <div className="form-control w-full mb-6">
+       <div className='flex flex-col lg:flex-row gap-6 mb-6'>
+       <div className="form-control w-full ">
               <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
                 Photo
               </label>
@@ -135,6 +136,19 @@ const Register = () => {
                 className="border rounded w-full py-[6px] px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
+
+            <div className="form-control w-full ">
+              <label htmlFor="mobile" className="block text-sm font-medium text-gray-600">
+                Mobile Number
+              </label>
+              <input
+                type="tel"
+                {...register('mobile', { required: true })}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+              {errors.mobile && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+            </div>
+       </div>
 
            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
 
