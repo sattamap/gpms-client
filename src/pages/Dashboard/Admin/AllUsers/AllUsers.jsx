@@ -184,7 +184,8 @@ const AllUsers = () => {
             backgroundColor: 'rgba(0, 0, 0, 0.75)',
           },
           content: {
-            width: '50%',
+            width: '30%',
+            height: '30%',
             margin: 'auto',
             borderRadius: '8px',
             padding: '20px',
@@ -198,15 +199,22 @@ const AllUsers = () => {
           <FaTimes />
         </button>
         {selectedUser && (
-          <div className="flex items-center justify-center gap-4">
-            <div>
-              <p><strong>Name:</strong> {selectedUser.name}</p>
-              <p><strong>Email:</strong> {selectedUser.email}</p>
-              <p><strong>Section:</strong> {selectedUser.section}</p>
-              <p><strong>Designation:</strong> {selectedUser.designation}</p>
-            </div>
-            <div><img src={selectedUser.photoURL} alt={selectedUser.name} /></div>
-          </div>
+        <div className="flex items-center justify-center gap-4">
+        <div>
+          <p><strong>Name:</strong> {selectedUser.name}</p>
+          <p><strong>Email:</strong> {selectedUser.email}</p>
+          <p><strong>Section:</strong> {selectedUser.section}</p>
+          <p><strong>Designation:</strong> {selectedUser.designation}</p>
+        </div>
+        <div className="w-32 h-32">
+  <img
+    src={selectedUser.photoURL}
+    alt={selectedUser.name}
+    className="w-full h-full object-cover"
+  />
+</div>
+      </div>
+      
         )}
       </Modal>
     </div>
