@@ -1,8 +1,10 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaUsers } from "react-icons/fa";
+import { FaHome, FaSignOutAlt, FaUser, FaUsers } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { RiUserSharedFill } from "react-icons/ri";
+import { FaUsersGear } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -64,11 +66,7 @@ const Dashboard = () => {
         <ul className="menu p-4">
           {userData?.status === "admin" && (
             <>
-              <li>
-                <NavLink to="/dashboard/welcome">
-                  <FaHome /> Admin Home
-                </NavLink>
-              </li>
+            
               <li>
                 <NavLink to="/dashboard/allUsers">
                   <FaUsers /> All Users
@@ -76,12 +74,12 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/activeVisitor">
-                  <FaUsers /> Active Visitor
+                  <RiUserSharedFill/> Active Visitor
                 </NavLink>
               </li>
               <li>
               <NavLink to="/dashboard/manage">
-              <FaUser /> Manage Visitor
+              <FaUsersGear /> Manage Visitor
             </NavLink>
               </li>
             </>
@@ -120,7 +118,7 @@ const Dashboard = () => {
 
           <li>
             <NavLink onClick={handleLogOut}>
-              <FaHome /> Logout
+              <FaSignOutAlt /> Logout
             </NavLink>
           </li>
         </ul>
