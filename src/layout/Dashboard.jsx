@@ -59,7 +59,7 @@ const Dashboard = () => {
             alt="Profile"
             className="w-20 h-20 rounded-full mr-2"
           />
-          <span className="text-white">{user?.name}</span>
+          <span className="text-white">{user?.displayName}</span>
         </div>
         <ul className="menu p-4">
           {userData?.status === "admin" && (
