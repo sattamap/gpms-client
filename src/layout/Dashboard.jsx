@@ -5,6 +5,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { RiUserSharedFill } from "react-icons/ri";
 import { FaUsersGear } from "react-icons/fa6";
+import { TbUsersPlus } from "react-icons/tb";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -89,7 +90,7 @@ const Dashboard = () => {
           
                <li>
                <NavLink to="/dashboard/activeVisitor">
-                 <FaUsers /> Active Visitor
+               <RiUserSharedFill/> Active Visitor
                </NavLink>
              </li>
           )}
@@ -98,10 +99,10 @@ const Dashboard = () => {
             // Add links specific to the coordinator
             <li>
             <NavLink to="/dashboard/addVisitor">
-              <FaUser /> Add Visitor
+              <TbUsersPlus /> Add Visitor
             </NavLink>
             <NavLink to="/dashboard/manage">
-              <FaUser /> Manage Visitor
+            <FaUsersGear /> Manage Visitor
             </NavLink>
           </li>
           )}
