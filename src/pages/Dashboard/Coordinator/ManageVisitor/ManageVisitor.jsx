@@ -98,8 +98,8 @@ const ManageVisitor = () => {
         <h2>{visitors.length}</h2>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="table">
+      <div className="overflow-x-auto ">
+        <table className="table table-xs">
           <thead>
             <tr>
               <th></th>

@@ -102,8 +102,8 @@ const AllUsers = () => {
         <h2 className="text-2xl text-slate-100 font-extrabold">All Users</h2>
         <h2 className="text-2xl text-slate-100 font-extrabold">Total users: {users.length}</h2>
       </div>
-      <div className="overflow-x-auto">
-        <table className="table table-xs table-zebra mt-10">
+      <div className="overflow-x-auto px-20">
+        <table className="table table-xs table-zebra mt-10 ">
           <thead>
             <tr>
               <th></th>
