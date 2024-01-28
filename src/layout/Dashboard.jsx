@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { FaHome, FaSignOutAlt, FaUser, FaUsers } from "react-icons/fa";
+import { FaHome, FaSignOutAlt, FaUsers } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
