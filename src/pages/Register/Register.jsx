@@ -88,12 +88,12 @@ const Register = () => {
   };
 
   return (
-    <div className="w-3/4  mx-auto mt-8">
+    <div className="w-3/4  mx-auto mt-8 bg-emerald-400 lg:p-20">
       <div className=" items-center">
-        <div>
+        <div className='p-4'>
           <h1 className="text-4xl font-bold mb-4">Create an Account</h1>
           <p className="text-base text-gray-700">
-            Join the Gate Pass Management System and streamline your gate access operations. Sign up today to unlock personalized gate pass services and enjoy a seamless experience tailored just for you.
+            Join the Gate Pass Management System and streamline your gate access operations. 
           </p>
         </div>
         <div className="w-3/4 mx-auto bg-white p-4 my-10 rounded-md shadow-xl md:w-4/5 lg:w-full xl:w-full">
@@ -137,17 +137,7 @@ const Register = () => {
               />
             </div>
 
-            <div className="form-control w-full ">
-              <label htmlFor="mobile" className="block text-sm font-medium text-gray-600">
-                Mobile Number
-              </label>
-              <input
-                type="tel"
-                {...register('mobile', { required: true })}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              />
-              {errors.mobile && <p className="text-red-500 text-xs mt-1">This field is required</p>}
-            </div>
+          
        </div>
 
            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
@@ -225,7 +215,7 @@ const Register = () => {
            </div>
 
            <div className='flex justify-center'>
-           <button type="submit" className="w-1/6 bg-blue-500 text-white px-4 py-2 rounded-full mt-4">
+           <button type="submit" className="btn btn-sm sm:btn-sm md:btn-md lg:btn-lg bg-blue-500 text-white rounded-full mt-4">
               Sign Up
             </button>
            </div>

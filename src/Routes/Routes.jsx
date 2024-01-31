@@ -6,9 +6,11 @@ import Dashboard from "../layout/Dashboard";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
 import AddVisitor from "../pages/Dashboard/Coordinator/AddVisitor/AddVisitor";
 import ActiveVisitor from "../pages/Dashboard/Admin/ActiveVisitor/ActiveVisitor";
-import ManageVisitor from "../pages/Dashboard/Coordinator/ManageVisitor/ManageVisitor";
 import UpdateVisitor from "../pages/Dashboard/Coordinator/UpdateVisitor/UpdateVisitor";
 import NoRoleWelcome from "../pages/Dashboard/NoRole/NoRoleWelcome/NoRoleWelcome";
+import PrivateRoutes from "./PrivateRoutes";
+import ManageVisitorByAdmin from "../pages/Dashboard/Admin/ManageVisitorByAdmin/ManageVisitorByAdmin";
+import ManageVisitor from "../pages/Dashboard/Coordinator/ManageVisitor/ManageVisitor";
 
 
 export const router = createBrowserRouter([
@@ -28,7 +30,7 @@ export const router = createBrowserRouter([
     },
     {
       path: "dashboard",
-      element: <Dashboard></Dashboard>,
+      element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
       children: [
         // user (no role) routes
         {
@@ -45,6 +47,10 @@ export const router = createBrowserRouter([
         {
           path: "activeVisitor",
           element: <ActiveVisitor></ActiveVisitor>,
+        },
+        {
+          path: "manageVisitor",
+          element: <ManageVisitorByAdmin></ManageVisitorByAdmin>,
         },
         
   

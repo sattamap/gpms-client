@@ -27,6 +27,7 @@ const AddVisitor = () => {
       const visitorInfo = {
         name: data.name,
         section: data.section,
+        mobile: data.mobile,
         purpose: data.purpose,
         entranceTime: entranceTime.toISOString(), // Store the entrance time as a string
         status: 'active',
@@ -99,6 +100,17 @@ const AddVisitor = () => {
                 <option value="News">News</option>
               </select>
               {errors.section && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="mobile" className="block text-sm font-medium text-gray-600">
+                Mobile Number
+              </label>
+              <input
+                type="tel"
+                {...register('mobile', { required: true })}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+              {errors.mobile && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
             <div className="mb-4">
               <label  className="block text-sm font-medium text-gray-600">

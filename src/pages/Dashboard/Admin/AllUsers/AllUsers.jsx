@@ -178,48 +178,50 @@ const AllUsers = () => {
       </div>
 
       <Modal
-        
-        isOpen={isModalOpen}
-        onRequestClose={handleCloseModal}
-        contentLabel="User Information"
-        style={{
-          overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          },
-          content: {
-            width: '30%',
-            height: '30%',
-            margin: 'auto',
-            borderRadius: '8px',
-            padding: '20px',
-          },
-        }}
-      >
-        <button
-          onClick={handleCloseModal}
-          className="absolute top-0 right-0 p-2 cursor-pointer"
-        >
-          <FaTimes />
-        </button>
-        {selectedUser && (
-        <div className="flex items-center justify-center gap-4">
-        <div>
-          <p><strong>Name:</strong> {selectedUser.name}</p>
-          <p><strong>Email:</strong> {selectedUser.email}</p>
-          <p><strong>Section:</strong> {selectedUser.section}</p>
-          <p><strong>Designation:</strong> {selectedUser.designation}</p>
-        </div>
-        <div className="w-32 h-32">
-  <img
-    src={selectedUser.photoURL}
-    alt={selectedUser.name}
-    className="w-full h-full object-cover"
-  />
-</div>
+  isOpen={isModalOpen}
+  onRequestClose={handleCloseModal}
+  contentLabel="User Information"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    },
+    content: {
+      width: '80%', // Adjusted width for smaller screens
+      maxWidth: '400px', // Maximum width to maintain readability
+      height: 'auto', // Height will adjust based on content
+      maxHeight: '80%', // Maximum height to avoid overflow
+      margin: 'auto',
+      borderRadius: '8px',
+      padding: '10px',
+    },
+  }}
+>
+  <button
+    onClick={handleCloseModal}
+    className="absolute top-0 right-0 p-2 cursor-pointer"
+  >
+    <FaTimes />
+  </button>
+  {selectedUser && (
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+      <div>
+        <p><strong>Name:</strong> {selectedUser.name}</p>
+        <p><strong>Email:</strong> {selectedUser.email}</p>
+        <p><strong>Section:</strong> {selectedUser.section}</p>
+        <p><strong>Designation:</strong> {selectedUser.designation}</p>
       </div>
-      
-        )}
-      </Modal>
+      <div className="w-2/5 md:w-32 h-auto">
+        <img
+          src={selectedUser.photoURL}
+          alt={selectedUser.name}
+          className="w-full h-full  md:object-contain"
+        />
+      </div>
+    </div>
+  )}
+</Modal>
+
+
     </div>
   );
 };
