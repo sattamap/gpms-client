@@ -2,8 +2,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -12,6 +13,9 @@ const Register = () => {
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   const {
     register,
@@ -21,11 +25,18 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const validatePasswordMatch = (value) => {
     const password = watch('password');
     return password === value || 'Passwords do not match';
   };
-
   const onSubmit = async (data) => {
     try {
       const imageFile = { image: data.image[0] };
@@ -98,127 +109,145 @@ const Register = () => {
         </div>
         <div className="w-3/4 mx-auto bg-white p-4 my-10 rounded-md shadow-xl md:w-4/5 lg:w-full xl:w-full">
           <form onSubmit={handleSubmit(onSubmit)}>
-    <div className='flex flex-col lg:flex-row gap-6 mb-6'>
-    <div className="form-control w-full">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-600">
-                Name
-              </label>
-              <input
-                type="text"
-                {...register('name', { required: true })}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              />
-              {errors.name && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
+              <div className="form-control w-full">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-600">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  {...register('name', { required: true })}
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  placeholder="Enter your name"
+                />
+                {errors.name && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+              </div>
+
+              <div className="form-control w-full ">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-600">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  {...register('email', { required: true })}
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  placeholder="Enter your email"
+                />
+                {errors.email && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+              </div>
             </div>
 
-            <div className="form-control w-full ">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-                Email
-              </label>
-              <input
-                type="email"
-                {...register('email', { required: true })}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              />
-              {errors.email && <p className="text-red-500 text-xs mt-1">This field is required</p>}
-            </div>
-    </div>
-
-       <div className='flex flex-col lg:flex-row gap-6 mb-6'>
-       <div className="form-control w-full ">
-              <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
-                Photo
-              </label>
-              <input
-                type="file"
-                id="image"
-                {...register('image')}
-                className="border rounded w-full py-[6px] px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
+            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
+              <div className="form-control w-full ">
+                <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                  Photo
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  {...register('image')}
+                  className="border rounded w-full py-[6px] px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Choose your profile picture"
+                />
+              </div>
             </div>
 
-          
-       </div>
+            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
+              <div className="form-control w-full">
+                <label htmlFor="section" className="block text-sm font-medium text-gray-600">
+                  Section
+                </label>
+                <select
+                  {...register('section', { required: true })}
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  placeholder="Select your section"
+                >
+                  <option value="default" disabled>Select Section</option>
+                  <option value="Program">Program</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="News">News</option>
+                </select>
+                {errors.section && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+              </div>
 
-           <div className='flex flex-col lg:flex-row gap-6 mb-6'>
-
-           <div className="form-control w-full">
-              <label htmlFor="section" className="block text-sm font-medium text-gray-600">
-                Section
-              </label>
-              <select
-                {...register('section', { required: true })}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              >
-                <option value="default" disabled>Select Section</option>
-                <option value="Program">Program</option>
-                <option value="Engineering">Engineering</option>
-                <option value="News">News</option>
-              </select>
-              {errors.section && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+              <div className="form-control w-full">
+                <label htmlFor="designation" className="block text-sm font-medium text-gray-600">
+                  Designation
+                </label>
+                <input
+                  type="text"
+                  {...register('designation', { required: true })}
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  placeholder="Enter your designation"
+                />
+                {errors.designation && <p className="text-red-500 text-xs mt-1">This field is required</p>}
+              </div>
             </div>
 
-            <div className="form-control w-full">
-              <label htmlFor="designation" className="block text-sm font-medium text-gray-600">
-                Designation
-              </label>
-              <input
-                type="text"
-                {...register('designation', { required: true })}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              />
-              {errors.designation && <p className="text-red-500 text-xs mt-1">This field is required</p>}
-            </div>
-           </div>
+            <div className='flex flex-col lg:flex-row gap-6 mb-6'>
+              <div className="form-control w-full relative">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+                  Password
+                </label>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('password', {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]/,
+                  })}
+                  className={`mt-1 p-2 w-full border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                  placeholder="Enter your password"
+                />
+                <div className="absolute top-1/2 right-0 flex items-center pr-3">
+                  {showPassword ? (
+                    <FaEyeSlash className="h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+                  ) : (
+                    <FaEye className="h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+                  )}
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.password?.type === 'required' && 'Password is required'}
+                    {errors.password?.type === 'minLength' && 'Password must be 6 characters'}
+                    {errors.password?.type === 'maxLength' && 'Password must be less than 20 characters'}
+                    {errors.password?.type === 'pattern' && 'Password must have an uppercase, a lowercase, and a special character'}
+                  </p>
+                )}
+              </div>
 
-           <div className='flex flex-col lg:flex-row gap-6 mb-6'>
-           <div className="form-control w-full">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-600">
-                Password
-              </label>
-              <input
-                type="password"
-                {...register('password', {
-                  required: true,
-                  minLength: 6,
-                  maxLength: 20,
-                  pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]/,
-                })}
-                className={`mt-1 p-2 w-full border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-              />
-              {errors.password && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.password?.type === 'required' && 'Password is required'}
-                  {errors.password?.type === 'minLength' && 'Password must be 6 characters'}
-                  {errors.password?.type === 'maxLength' && 'Password must be less than 20 characters'}
-                  {errors.password?.type === 'pattern' && 'Password must have an uppercase, a lowercase, and a special character'}
-                </p>
-              )}
+              <div className="form-control w-full relative">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-600">
+                  Confirm Password
+                </label>
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  {...register('confirmPassword', {
+                    required: true,
+                    validate: validatePasswordMatch,
+                  })}
+                  className={`mt-1 p-2 w-full border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                  placeholder="Confirm your password"
+                />
+                <div className="absolute top-1/2 right-0 flex items-center pr-3">
+                  {showConfirmPassword ? (
+                    <FaEyeSlash className="h-6 w-6 text-gray-400 cursor-pointer" onClick={toggleConfirmPasswordVisibility} />
+                  ) : (
+                    <FaEye className="h-6 w-6 text-gray-400 cursor-pointer" onClick={toggleConfirmPasswordVisibility} />
+                  )}
+                </div>
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">{errors.confirmPassword?.message}</p>
+                )}
+              </div>
             </div>
 
-            <div className="form-control w-full">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-600">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                {...register('confirmPassword', {
-                  required: true,
-                  validate: validatePasswordMatch,
-                })}
-                className={`mt-1 p-2 w-full border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-              />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-xs mt-1">{errors.confirmPassword?.message}</p>
-              )}
+            <div className='flex justify-center'>
+              <button type="submit" className="btn btn-sm sm:btn-sm md:btn-md  bg-blue-500 text-white rounded-full mt-4">
+                Sign Up
+              </button>
             </div>
-           </div>
-
-           <div className='flex justify-center'>
-           <button type="submit" className="btn btn-sm sm:btn-sm md:btn-md lg:btn-lg bg-blue-500 text-white rounded-full mt-4">
-              Sign Up
-            </button>
-           </div>
           </form>
 
           <p className="text-center mt-3">

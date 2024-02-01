@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
         {
           path: 'updateVisitor/:id',
           element:<UpdateVisitor></UpdateVisitor>,
-          loader: ({params})=> fetch(`http://localhost:5000/visitors/update/${params.id}`)
+          loader: ({params})=> fetch(`https://gpms-server.vercel.app/visitors/update/${params.id}`)
   
         },
   

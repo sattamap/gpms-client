@@ -133,6 +133,8 @@ const Login = () => {
                 Reset it here
               </button>
             </p>
+               {/* Copyright notice */}
+        <p className="text-center mt-8 text-sm text-gray-500">&copy; 2024 Gate Pass Management System | Developed by Sattam</p>
           </div>
         </div>
       </div>
