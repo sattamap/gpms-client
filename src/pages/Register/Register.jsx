@@ -198,7 +198,7 @@ const Register = () => {
                     pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]/,
                   })}
                   className={`mt-1 p-2 w-full border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  placeholder="Enter your password"
+                  placeholder="Enter password"
                 />
                 <div className="absolute top-1/2 right-0 flex items-center pr-3">
                   {showPassword ? (
@@ -228,7 +228,7 @@ const Register = () => {
                     validate: validatePasswordMatch,
                   })}
                   className={`mt-1 p-2 w-full border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                  placeholder="Confirm your password"
+                  placeholder="Confirm password"
                 />
                 <div className="absolute top-1/2 right-0 flex items-center pr-3">
                   {showConfirmPassword ? (
@@ -244,7 +244,7 @@ const Register = () => {
             </div>
 
             <div className='flex justify-center'>
-              <button type="submit" className="btn btn-sm sm:btn-sm md:btn-md  bg-blue-500 text-white rounded-full mt-4">
+              <button type="submit" className="btn btn-sm sm:btn-sm md:btn-md  bg-blue-500 text-white rounded-xl mt-4">
                 Sign Up
               </button>
             </div>
