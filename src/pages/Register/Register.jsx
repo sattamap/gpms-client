@@ -99,7 +99,7 @@ const Register = () => {
   };
 
   return (
-    <div className="w-3/4  mx-auto mt-8 bg-emerald-400 lg:p-20">
+    <div className="w-3/4  mx-auto mt-8 pb-2 bg-emerald-400 lg:p-20">
       <div className=" items-center">
         <div className='p-4'>
           <h1 className="text-4xl font-bold mb-4">Create an Account</h1>
@@ -107,7 +107,7 @@ const Register = () => {
             Join the Gate Pass Management System and streamline your gate access operations. 
           </p>
         </div>
-        <div className="w-3/4 mx-auto bg-white p-4 my-10 rounded-md shadow-xl md:w-4/5 lg:w-full xl:w-full">
+        <div className="w-5/6 mx-auto bg-white p-3 my-3 rounded-md shadow-xl md:w-4/5 lg:w-full xl:w-full">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col lg:flex-row gap-6 mb-6'>
               <div className="form-control w-full">

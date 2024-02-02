@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import bb from '../../assets/bb.png';
-
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const { signIn, sendPassResetEmail } = useContext(AuthContext);
@@ -12,8 +12,8 @@ const Login = () => {
   const location = useLocation();
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || '/dashboard/';
- 
 
   const { register, handleSubmit } = useForm();
 
@@ -67,26 +67,25 @@ const Login = () => {
     }
   };
 
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-400">
       <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-md">
         <div className=' flex items-center justify-center text-xl font-bold bg-purple-300 rounded-xl mb-5'>
-        <div>
-              <img className='w-20' src={bb} alt="" />
-            </div>
+          <div>
+            <img className='w-20' src={bb} alt="" />
+          </div>
           <h2>GPMS of Bangladesh Betar, Bandarban</h2>
-          
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="text-center md:text-left mb-8">
-          
             <h4 className="text-4xl font-bold mb-4 text-emerald-800">Welcome Back!</h4>
             <p className="text-base">
               Log in to manage gate pass requests and streamline your gate access operations.
             </p>
-           
           </div>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,17 +98,26 @@ const Login = () => {
                     name="email"
                     {...register('email', { required: true })}
                     className="mt-1 p-2 w-full border rounded-md"
+                    placeholder="Enter email"
                   />
                 </div>
-                <div>
+                <div className="relative">
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     name="password"
                     {...register('password', { required: true })}
                     className="mt-1 p-2 w-full border rounded-md"
+                    placeholder="Enter password"
                   />
+                  <div className="absolute top-1/2 right-0 pr-3 flex items-center">
+                    {showPassword ? (
+                      <FaEyeSlash className="h-5 w-5 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+                    ) : (
+                      <FaEye className="h-5 w-5 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+                    )}
+                  </div>
                 </div>
                 <div>
                   <button
@@ -133,14 +141,13 @@ const Login = () => {
                 Reset it here
               </button>
             </p>
-               {/* Copyright notice */}
-        <p className="text-center mt-8 text-sm text-gray-500">&copy; 2024 Gate Pass Management System | Developed by Sattam</p>
+            <p className="text-center mt-8 text-sm text-gray-500">&copy; 2024 Gate Pass Management System | Developed by Sattam</p>
           </div>
         </div>
       </div>
 
-       {/* Reset password modal */}
-       {showResetModal && (
+      {/* Reset password modal */}
+      {showResetModal && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-md shadow-md">
             <h2 className="text-xl font-semibold mb-4">Reset Password</h2>
