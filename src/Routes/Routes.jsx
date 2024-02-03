@@ -11,6 +11,9 @@ import NoRoleWelcome from "../pages/Dashboard/NoRole/NoRoleWelcome/NoRoleWelcome
 import PrivateRoutes from "./PrivateRoutes";
 import ManageVisitorByAdmin from "../pages/Dashboard/Admin/ManageVisitorByAdmin/ManageVisitorByAdmin";
 import ManageVisitor from "../pages/Dashboard/Coordinator/ManageVisitor/ManageVisitor";
+import Contact from "../pages/Login/Contact";
+import AboutGPMS from "../pages/Login/AboutGPMS";
+
 
 
 export const router = createBrowserRouter([
@@ -25,6 +28,14 @@ export const router = createBrowserRouter([
         {
           path: "/",
           element: <Login></Login>,
+        },
+        {
+          path: "contact",
+          element:<Contact></Contact> ,
+        },
+        {
+          path: "about",
+          element: <AboutGPMS></AboutGPMS>,
         },
       ]
     },

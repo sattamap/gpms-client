@@ -141,9 +141,16 @@ const Login = () => {
                 Reset it here
               </button>
             </p>
-            <p className="text-center mt-8 text-sm text-gray-500">&copy; 2024 Gate Pass Management System | Developed by Sattam</p>
           </div>
         </div>
+       <div className='space-y-4'>
+       <div className="flex justify-center gap-4 mt-8">
+  <Link to="/contact" className="text-sm font-medium text-indigo-900 hover:underline border-r-2 border-black pr-4">Contact</Link>
+  <Link to="/about" className="text-sm font-medium text-indigo-900 hover:underline">About GPMS</Link>
+</div>
+            <p className="text-center mt-8 text-sm text-gray-500">&copy; 2024 Gate Pass Management System | Developed by Sattam</p>
+        
+       </div>
       </div>
 
       {/* Reset password modal */}
