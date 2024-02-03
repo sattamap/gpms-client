@@ -76,11 +76,11 @@ const ManageVisitorByAdmin = () => {
 
 
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
-const indexOfFirstItem = currentPage * itemsPerPage;
-const currentItems = isSearching ? searchResult.slice(indexOfFirstItem, indexOfLastItem) : visitors.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfFirstItem = currentPage * itemsPerPage;
+  const currentItems = isSearching ? searchResult.slice(indexOfFirstItem, indexOfLastItem) : visitors.slice(indexOfFirstItem, indexOfLastItem);
 
-const pages = isSearching ? Math.ceil(searchResult.length / itemsPerPage) : Math.ceil(visitors.length / itemsPerPage);
-const pageNumbers = [...Array(pages).keys()];
+  const pages = isSearching ? Math.ceil(searchResult.length / itemsPerPage) : Math.ceil(visitors.length / itemsPerPage);
+  const pageNumbers = [...Array(pages).keys()];
 
 
   const handlePageClick = (pageNumber) => {
@@ -131,7 +131,7 @@ const pageNumbers = [...Array(pages).keys()];
   }
 
 
-const handleSearchByDate = () => {
+  const handleSearchByDate = () => {
     // Search logic by single date
     if (searchDate.trim() === "") {
       Swal.fire({
@@ -141,31 +141,31 @@ const handleSearchByDate = () => {
       });
       return;
     }
-  
+
     // Format searchDate to match formattedDate
     const searchYear = searchDate.substring(0, 4);
     const searchMonth = searchDate.substring(5, 7);
     const searchDay = searchDate.substring(8, 10);
     const formattedSearchDate = `${searchDay}/${searchMonth}/${searchYear.slice(-2)}`;
     console.log("Formatted Search Date:", formattedSearchDate);
-  
+
     const searchResult = visitors.filter((visitor) => {
       const formattedDate = formatTime(visitor.entranceTime).formattedDate;
       console.log("Formatted Date:", formattedDate);
       console.log("Visitor:", visitor);
-  
+
       return formattedDate === formattedSearchDate;
     });
 
     setSearchResult(searchResult);
     setIsSearching(true);
-};
+  };
 
 
-  
 
-  
-  
+
+
+
 
   const handleSearchByDateRange = () => {
     // Search logic by date range
@@ -181,10 +181,10 @@ const handleSearchByDate = () => {
     const searchResult = visitors.filter((visitor) => {
       const visitorDate = new Date(visitor.entranceTime);
       const rangeStartDate = new Date(startDate);
-rangeStartDate.setHours(0, 0, 0, 0); // Set to the beginning of the day
+      rangeStartDate.setHours(0, 0, 0, 0); // Set to the beginning of the day
 
-const rangeEndDate = new Date(endDate);
-rangeEndDate.setHours(23, 59, 59, 999); // Set to the end of the day
+      const rangeEndDate = new Date(endDate);
+      rangeEndDate.setHours(23, 59, 59, 999); // Set to the end of the day
 
       return visitorDate >= rangeStartDate && visitorDate <= rangeEndDate;
     });
@@ -213,37 +213,37 @@ rangeEndDate.setHours(23, 59, 59, 999); // Set to the end of the day
   return (
     <div>
 
-   <div className='text-center bg-emerald-800 p-6 rounded-xl mb-6'>
+      <div className='text-center bg-emerald-800 p-6 rounded-xl mb-6'>
         <h2 className='text-2xl text-slate-100 font-bold'>Total Visitors : <span className='bg-green-500 font-extrabold px-2 rounded-lg'>{visitors.length}</span></h2>
       </div>
       <div className="flex flex-col lg:flex-row gap-10 mb-6">
-  {/* Single Date Search */}
-  <div className="flex flex-col lg:flex-row items-center">
-    <input
-      type="date"
-      value={searchDate}
-      onChange={(e) => setSearchDate(e.target.value)}
-      className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
-    />
-    <button onClick={handleSearchByDate} className="bg-blue-500 text-white px-4 py-2 rounded-md">Search By Date</button>
-  </div>
-  {/* Date Range Search */}
-  <div className="flex flex-col lg:flex-row items-center">
-    <input
-      type="date"
-      value={startDate}
-      onChange={(e) => setStartDate(e.target.value)}
-      className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
-    />
-    <input
-      type="date"
-      value={endDate}
-      onChange={(e) => setEndDate(e.target.value)}
-      className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
-    />
-    <button onClick={handleSearchByDateRange} className="bg-blue-500 text-white px-4 py-2 rounded-md">Search By Date Range</button>
-  </div>
-</div>
+        {/* Single Date Search */}
+        <div className="flex flex-col lg:flex-row items-center">
+          <input
+            type="date"
+            value={searchDate}
+            onChange={(e) => setSearchDate(e.target.value)}
+            className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
+          />
+          <button onClick={handleSearchByDate} className="bg-blue-500 text-white px-4 py-2 rounded-md">Search By Date</button>
+        </div>
+        {/* Date Range Search */}
+        <div className="flex flex-col lg:flex-row items-center">
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
+          />
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="border border-gray-300 p-2 rounded-md mb-2 lg:mb-0 lg:mr-2"
+          />
+          <button onClick={handleSearchByDateRange} className="bg-blue-500 text-white px-4 py-2 rounded-md">Search By Date Range</button>
+        </div>
+      </div>
 
       <div className="overflow-x-auto ">
         <table className="table table-xs">
@@ -308,21 +308,24 @@ rangeEndDate.setHours(23, 59, 59, 999); // Set to the end of the day
           </tbody>
         </table>
 
-            {/* Pagination */}
-            <nav className="flex justify-center mt-10 mb-6">
-        <select className="mr-6 border border-solid border-teal-400 rounded-lg" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
-        <option value={5}>5 per page</option>
-        <option value={10}>10 per page</option>
-        {/* Add more options as needed */}
-      </select>
+
+      </div>
+      {/* Pagination */}
+      <nav className="flex flex-col items-center md:flex-row justify-center mt-10 mb-6">
+        <select className="mb-4 md:mb-0 mr-0 md:mr-6 border border-solid border-teal-400 rounded-lg" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
+          <option value={5}>5 per page</option>
+          <option value={10}>10 per page</option>
+          {/* Add more options as needed */}
+        </select>
+        <div className="flex justify-center md:justify-start mb-4 md:mb-0">
           <button
-            className="btn btn-sm btn-info"
+            className="btn btn-sm btn-info mr-2"
             onClick={handlePrevClick}
             disabled={currentPage === 0}
           >
             Previous
           </button>
-          <ul className="flex list-none gap-10 mx-8 ">
+          <ul className="flex list-none gap-2 md:gap-10">
             {pageNumbers.map((pageNumber) => (
               <li
                 key={pageNumber}
@@ -338,19 +341,20 @@ rangeEndDate.setHours(23, 59, 59, 999); // Set to the end of the day
             ))}
           </ul>
           <button
-            className="btn btn-sm btn-info"
+            className="btn btn-sm btn-info ml-2"
             onClick={handleNextClick}
             disabled={currentPage === pages - 1}
           >
             Next
           </button>
-        </nav>
+        </div>
+      </nav>
 
-         {/* Save PDF Button */}
+
+      {/* Save PDF Button */}
       {isSearching && (
         <button onClick={handleSavePDF} className="bg-blue-500 text-white px-4 py-2 rounded-md">Save as PDF</button>
       )}
-      </div>
     </div>
   );
 };

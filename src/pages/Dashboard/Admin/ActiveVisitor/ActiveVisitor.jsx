@@ -102,21 +102,25 @@ const ActiveVisitor = () => {
           </tbody>
         </table>
 
-              {/* Pagination */}
-              <nav className="flex justify-center mt-10">
-        <select className="mr-6 border border-solid border-teal-400 rounded-lg" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
-        <option value={5}>5 per page</option>
-        <option value={10}>10 per page</option>
-        {/* Add more options as needed */}
-      </select>
+
+      </div>
+      {/* Pagination */}
+      {/* Pagination */}
+      <nav className="flex flex-col items-center md:flex-row justify-center mt-10 mb-6">
+        <select className="mb-4 md:mb-0 mr-0 md:mr-6 border border-solid border-teal-400 rounded-lg" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
+          <option value={5}>5 per page</option>
+          <option value={10}>10 per page</option>
+          {/* Add more options as needed */}
+        </select>
+        <div className="flex justify-center md:justify-start mb-4 md:mb-0">
           <button
-            className="btn btn-sm btn-info"
+            className="btn btn-sm btn-info mr-2"
             onClick={handlePrevClick}
             disabled={currentPage === 0}
           >
             Previous
           </button>
-          <ul className="flex list-none gap-10 mx-8 ">
+          <ul className="flex list-none gap-2 md:gap-10">
             {pageNumbers.map((pageNumber) => (
               <li
                 key={pageNumber}
@@ -132,14 +136,14 @@ const ActiveVisitor = () => {
             ))}
           </ul>
           <button
-            className="btn btn-sm btn-info"
+            className="btn btn-sm btn-info ml-2"
             onClick={handleNextClick}
             disabled={currentPage === pages - 1}
           >
             Next
           </button>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </div>
   );
 };
