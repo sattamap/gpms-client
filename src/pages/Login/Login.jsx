@@ -18,26 +18,41 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
+    let errorMessage = 'An error occurred during login. Please try again.'; // Define errorMessage here
+  
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        const displayName = user.displayName || ''; // Get the user's display name (if available)
+        const welcomeMessage = `Welcome back to the GPMS, ${displayName}!`; // Construct the welcome message
         Swal.fire({
           title: 'Login Successful',
-          text: 'Welcome back to the Gate Pass Management System.',
+          text: welcomeMessage,
           icon: 'success',
         });
-
+  
         navigate(from, { replace: true });
       })
       .catch((error) => {
+        console.log("error object:", error);
+        
+        // Check for specific error code 'auth/invalid-credential'
+        if (error.code === 'auth/invalid-credential') {
+          errorMessage = 'Invalid credentials. Please check your email and password.';
+        }
+  
         Swal.fire({
           title: 'Login Failed',
-          text: error.message,
+          text: errorMessage,
           icon: 'error',
         });
       });
   };
+  
+  
+  
+  
+  
 
   const handleOpenResetModal = () => {
     setShowResetModal(true);
